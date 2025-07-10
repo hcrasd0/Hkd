@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>مكتب الهيثم للسفريات وخدمات الحج والعمرة</title>
+    <meta name="description" content="موقع مكتب الهيثم الرسمي لحجز تذاكر السفر وخدمات الحج والعمرة. خدمات مميزة وسريعة. احجز الآن عبر الإنترنت.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8f1e5, #f5e7d8);
+            color: #5a3921;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(248, 241, 229, 0.92);
+            z-index: -1;
+        }
+        
+        /* الصفحة الرئيسية */
+        #home-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            transition: opacity 0.5s ease;
+        }
+        
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://c.top4top.io/p_34772u7mj1.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            opacity: 0.3;
+        }
+        
+        .content {
+            text-align: center;
+            z-index: 10;
+            width: 90%;
+            max-width: 1000px;
+            padding: 20px;
+        }
+        
+        .welcome-text {
+            margin-bottom: 60px;
+        }
+        
+        .welcome-text h1 {
+            font-family: 'El Messiri', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #8b4513, #d2691e, #9932cc, #ff8c00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 300% 300%;
+            animation: gradientAnimation 8s ease infinite;
+        }
+        
+        .welcome-text p {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #8b4513;
+            margin-top: 10px;
+        }
+        
+        .image-slider {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 40px;
+        }
+        
+        .circle-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(210, 105, 30, 0.5);
+            border: 3px solid rgba(153, 50, 204, 0.5);
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .circle.active {
+            opacity: 1;
+        }
+        
+        .circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .title {
+            font-family: 'El Messiri', serif;
+            font-size: 2.5rem;
+            margin-top: 30px;
+            color: #5a3921;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #8b4513, #d2691e, #9932cc);
+            border-radius: 2px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #d2691e, #ff8c00);
+            color: #f8f1e5;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(210, 105, 30, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(210, 105, 30, 0.6);
+        }
+        
+        .logo-text {
+            font-family: 'El Messiri', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #5a3921;
+            margin-top: 30px;
+            background: linear-gradient(45deg, #8b4513, #d2691e, #9932cc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% 200%;
+            animation: gradientAnimation 6s ease infinite;
+        }
+        
+        /* صفحة الحجز */
+        #booking-page {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid rgba(139, 69, 19, 0.3);
+        }
+        
+        .logo {
+            font-family: 'El Messiri', serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #8b4513, #d2691e, #9932cc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 300% 300%;
+            animation: gradientAnimation 8s ease infinite;
+        }
+        
+        .page-title {
+            font-size: 2.2rem;
+            color: #d2691e;
+            margin: 15px 0;
+        }
+        
+        .section-title {
+            font-family: 'El Messiri', serif;
+            font-size: 1.8rem;
+            color: #8b4513;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(139, 69, 19, 0.3);
+        }
+        
+        .booking-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            background: rgba(255, 248, 240, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #8b4513;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #d2b48c;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #5a3921;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: #9932cc;
+            outline: none;
+            box-shadow: 0 0 10px rgba(153, 50, 204, 0.3);
+        }
+        
+        .form-group .optional {
+            color: #a78a7f;
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+        
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        .file-upload input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-upload-label {
+            display: block;
+            padding: 12px 15px;
+            border: 2px dashed #d2b48c;
+            border-radius: 8px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.7);
+            color: #8b4513;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload-label:hover {
+            border-color: #9932cc;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .payment-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(139, 69, 19, 0.1);
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #8b4513, #d2691e);
+            color: #f8f1e5;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 30px 0 20px;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.5);
+        }
+        
+        .contact-section {
+            background: rgba(255, 248, 240, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+        
+        .contact-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #8b4513;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #5a3921;
+            transition: all 0.3s ease;
+        }
+        
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #8b4513, #d2691e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .icon:hover .icon-circle {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.5);
+        }
+        
+        .icon:hover {
+            color: #d2691e;
+        }
+        
+        .invoice-section {
+            background: rgba(255, 248, 240, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+        
+        .invoice-number {
+            font-size: 1.5rem;
+            color: #8b4513;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(139, 69, 19, 0.1);
+            border-radius: 8px;
+        }
+        
+        .invoice-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .invoice-btn {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #9932cc, #8a2be2);
+            color: #f8f1e5;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(153, 50, 204, 0.3);
+        }
+        
+        .invoice-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(153, 50, 204, 0.5);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px 0;
+            position: relative;
+        }
+        
+        .designer-box {
+            display: inline-block;
+            padding: 20px 40px;
+            background: linear-gradient(45deg, #8b4513, #d2691e, #9932cc, #ff8c00);
+            background-size: 300% 300%;
+            border-radius: 15px;
+            animation: gradientAnimation 8s ease infinite;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .designer-name {
+            font-family: 'El Messiri', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f8f1e5;
+            margin-bottom: 5px;
+        }
+        
+        .designer-contact {
+            font-size: 1.1rem;
+            color: #f8f1e5;
+            font-weight: 500;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: rgba(139, 69, 19, 0.1);
+            color: #8b4513;
+            border: 1px solid rgba(139, 69, 19, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-btn:hover {
+            background: rgba(139, 69, 19, 0.2);
+        }
+        
+        /* صفحة الفاتورة */
+        #invoice-page {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .invoice-container {
+            background: white;
+            color: #5a3921;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border: 1px solid #d2b48c;
+        }
+        
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #8b4513;
+        }
+        
+        .invoice-logo {
+            font-family: 'El Messiri', serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #8b4513;
+            font-weight: 700;
+        }
+        
+        .invoice-subtitle {
+            font-size: 1.5rem;
+            color: #d2691e;
+            margin-bottom: 5px;
+        }
+        
+        .invoice-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #f8f1e5;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .invoice-meta div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .invoice-meta span {
+            font-weight: bold;
+            color: #8b4513;
+        }
+        
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        
+        .invoice-table th {
+            background: #8b4513;
+            color: white;
+            padding: 12px 15px;
+            text-align: right;
+        }
+        
+        .invoice-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #d2b48c;
+        }
+        
+        .invoice-table tr:nth-child(even) {
+            background-color: #f8f1e5;
+        }
+        
+        .invoice-total {
+            text-align: left;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #8b4513;
+            padding: 20px;
+            background: #f8f1e5;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .invoice-footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #d2b48c;
+            margin-top: 20px;
+            color: #a78a7f;
+        }
+        
+        .invoice-footer p {
+            margin: 10px 0;
+        }
+        
+        .stamp {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            transform: rotate(-15deg);
+            opacity: 0.3;
+            color: #9932cc;
+            font-size: 2rem;
+            font-weight: bold;
+            border: 3px solid #9932cc;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        
+        .signature {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            text-align: center;
+            font-style: italic;
+            color: #a78a7f;
+        }
+        
+        .signature-line {
+            width: 200px;
+            height: 1px;
+            background: #5a3921;
+            margin: 5px auto;
+        }
+        
+        .admin-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .admin-btn {
+            padding: 8px 16px;
+            background: linear-gradient(45deg, #d2691e, #ff8c00);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .admin-btn:hover {
+            opacity: 0.9;
+        }
+        
+        /* استعلام الطباعة */
+        @media print {
+            body, html {
+                background: white !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            body * {
+                visibility: hidden;
+            }
+            
+            #invoice-page, 
+            #invoice-page * {
+                visibility: visible;
+            }
+            
+            #invoice-page {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                background: white;
+            }
+            
+            .invoice-container {
+                box-shadow: none;
+                padding: 20px;
+                margin: 0;
+                width: 100%;
+                border: none;
+                page-break-inside: avoid;
+            }
+            
+            .back-btn, 
+            .invoice-actions, 
+            .admin-controls,
+            .footer,
+            #print-invoice-page-btn {
+                display: none !important;
+            }
+            
+            .invoice-header,
+            .invoice-meta,
+            .invoice-table,
+            .invoice-total,
+            .signature,
+            .stamp {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @media (max-width: 768px) {
+            .welcome-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .welcome-text p {
+                font-size: 1.3rem;
+            }
+            
+            .image-slider {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .logo-text {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .social-icons {
+                flex-wrap: wrap;
+            }
+            
+            .icon-circle {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .designer-box {
+                padding: 15px 30px;
+            }
+            
+            .designer-name {
+                font-size: 1.5rem;
+            }
+            
+            .invoice-logo {
+                font-size: 2rem;
+            }
+            
+            .admin-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .welcome-text h1 {
+                font-size: 2rem;
+            }
+            
+            .welcome-text p {
+                font-size: 1.1rem;
+            }
+            
+            .image-slider {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .title {
+                font-size: 1.7rem;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1.2rem;
+            }
+            
+            .logo {
+                font-size: 1.7rem;
+            }
+            
+            .page-title {
+                font-size: 1.5rem;
+            }
+            
+            .invoice-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .designer-box {
+                padding: 12px 25px;
+            }
+            
+            .designer-name {
+                font-size: 1.3rem;
+            }
+            
+            .designer-contact {
+                font-size: 0.95rem;
+            }
+            
+            .invoice-logo {
+                font-size: 1.7rem;
+            }
+        }
+        
+        /* تحميل الشاشة */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(248, 241, 229, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(139, 69, 19, 0.3);
+            border-top: 8px solid #8b4513;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loader-text {
+            font-size: 1.5rem;
+            color: #8b4513;
+            text-align: center;
+            max-width: 300px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="spinner">         🛫</div>
+        <div class="loader-text">جاري تحميل النظام، الرجاء الانتظار...</div>
+    </div>
+    
+    <div class="overlay">💻</div>
+    
+    <!-- الصفحة الرئيسية -->
+    <div id="home-page">
+        <div class="background"></div>
+        <img src="https://iili.io/FERT7aI.png"alt="قسم الاعلانات">
+        <div class="content">
+            <div class="welcome-text">
+                <h1>مرحباً بكم في مكتب الهيثم للسفريات وخدمات الحج والعمرة</h1>
+                <p>احجز تذكرتك وخدمات الحج والعمرة بكل سهولة</p>
+            </div>
+            
+            <div class="image-slider">
+                <div class="circle-container">
+                    <!-- هنا يمكنك إضافة حتى 10 صور -->
+                    <div class="circle active">
+                        <img src="https://iili.io/FEqtp3l.webp" alt="شعار مكتب الهيثم">
+                    </div>
+                    <div class="circle">
+                        <img src="https://iili.io/FEnlx4I.png" alt="خدمات الحج والعمرة">
+                    </div>
+                    <div class="circle">
+                        <img src="https://iili.io/FEqtya2.jpg" alt="وجهات سياحية">
+                    </div>
+                    <div class="circle">
+                        <img src="https://iili.io/FEIL85x.png" alt="رحلات الحج">
+                    </div>
+                    <div class="circle">
+                        <img src="https://iili.io/FEIZmPt.jpg" alt="عروض خاصة">
+                    </div>
+                    <div class="circle">
+                        <img src="https://iili.io/FEIbC8u.jpg" alt="فنادق مميزة">
+                    </div>
+                    <!-- يمكنك إضافة المزيد من الصور هنا -->
+                    <!--
+                    <div class="circle">
+                        <img src="https://iili.io/FEnlx4I.png" alt="مكتب">
+                    </div>
+                    <div class="circle">
+                        <img src="https://iili.io/FEA6eXS.png" alt="وصف الصورة 8">
+                    </div>
+                    <div class="circle">
+                        <img src="رابط_الصورة_9" alt="وصف الصورة 9">
+                    </div>
+                    <div class="circle">
+                        <img src="رابط_الصورة_10" alt="وصف الصورة 10">
+                    </div>
+                    -->
+                </div>
+            </div>
+            
+            <div class="title">مكتب الهيثم للسفريات وخدمات الحج والعمرة</div>
+            
+            <button id="book-now-btn" class="cta-button">احجز الآن</button>
+            
+            <div class="logo-text">مكتب الهيثم للسفريات وخدمات الحج والعمرة</div>
+        </div>
+    </div>
+    
+    <!-- صفحة الحجز -->
+    <div id="booking-page">
+        <button class="back-btn" id="back-to-home">
+            <i class="fas fa-arrow-left"></i> العودة
+        </button>
+        
+        <div class="container">
+            <header>
+                <div class="logo">مكتب الهيثم للسفريات وخدمات الحج والعمرة</div>
+                <h1 class="page-title">حجز تذاكر سفر</h1>
+            </header>
+            
+            <main>
+                <h2 class="section-title">تفاصيل الحجز</h2>
+                <form class="booking-form" id="bookingForm">
+                    <div class="form-group">
+                        <label for="destination">اين تريد السفر <span class="optional">(اختياري)</span></label>
+                        <input type="text" id="destination" placeholder="اين تريد السفر">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="visaType">عمره تأشيرة عمل <span class="optional">(اختياري)</span></label>
+                        <select id="visaType">
+                            <option value="">اختر نوع التأشيرة</option>
+                            <option value="tourism">يوجد لدي تأشيرة</option>
+                            <option value="work">تأشيرة عمل</option>
+                            <option value="student">تأشيرة عمره</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fullName"> ادخل اسمك الكامل</label>
+                        <input type="text" id="fullName" placeholder="الاسم الكامل" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="passport"> ادخل رقم الجواز</label>
+                        <input type="text" id="passport" placeholder="رقم جواز السفر" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">ادخل رقم الجوال</label>
+                        <input type="tel" id="phone" placeholder="رقم الهاتف" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="passportImage">ارفع صوره من الجواز <span class="optional">(اختياري)</span></label>
+                        <div class="file-upload">
+                            <label for="passportImage" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i> انقر لرفع صورة الجواز
+                            </label>
+                            <input type="file" id="passportImage" accept="image/*">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="travelDate">تاريخ السفر</label>
+                        <input type="date" id="travelDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="day"> اليوم</label>
+                        <select id="day" required>
+                            <option value="">اختر اليوم</option>
+                            <option value="saturday">السبت</option>
+                            <option value="sunday">الأحد</option>
+                            <option value="monday">الاثنين</option>
+                            <option value="tuesday">الثلاثاء</option>
+                            <option value="wednesday">الأربعاء</option>
+                            <option value="thursday">الخميس</option>
+                            <option value="friday">الجمعة</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city"> من اي مدينه <span class="optional">(اختياري)</span></label>
+                        <input type="text" id="city" placeholder="المدينة">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="country">من اين تحجز <span class="optional">(اختياري)</span></label>
+                        <input type="text" id="country" placeholder="البلد">
+                    </div>
+                    
+                    <div class="payment-section">
+                        <div class="form-group">
+                            <label for="payment"> الدفع <span class="optional">(اختياري)</span></label>
+                            <select id="payment">
+                                <option value="">اختر طريقة الدفع</option>
+                                <option value="cash">نقداً</option>
+                                <option value="credit">بطاقة ائتمان</option>
+                                <option value="bank">تحويل حواله من اي صراف</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="remaining">كم دفهت <span class="optional">(اختياري)</span></label>
+                            <input type="number" id="remaining" placeholder="مدفوع">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <i class="fas fa-paper-plane"></i> احجز الان
+                    </button>
+                </form>
+                
+<div class="contact-section">
+  <h2 class="contact-title">قسم الاستفسارات</h2>
+  <p style="text-align: center; font-size: 1.2rem; margin-bottom: 25px;">
+    للتواصل والاستفسارات يرجى الاتصال بنا
+  </p>
+
+  <div class="social-icons">
+    
+    <!-- اتصال -->
+    <a href="tel:+967734490473" class="icon">
+      <div class="icon-circle">
+        <i class="fas fa-phone"></i>
+      </div>
+      <span>اتصال</span>
+    </a>
+
+    <!-- واتساب -->
+    <a href="https://wa.me/+967 783 499 922" class="icon" target="_blank">
+      <div class="icon-circle">
+        <i class="fab fa-whatsapp"></i>
+      </div>
+      <span>واتساب</span>
+    </a>
+
+    <!-- تلجرام -->
+    <a href="https://t.me/hcrasdzx" class="icon" target="_blank">
+      <div class="icon-circle">
+        <i class="fab fa-telegram"></i>
+      </div>
+      <span>تلجرام</span>
+    </a>
+
+    <!-- فيسبوك -->
+    <a href="https://facebook.com/PageName" class="icon" target="_blank">
+      <div class="icon-circle">
+        <i class="fab fa-facebook-f"></i>
+      </div>
+      <span>فيسبوك</span>
+    </a>
+
+  </div>
+</div>
+                
+                <div class="invoice-section">
+                    <h2 class="section-title">قسم طباعه الفاتوره</h2>
+                    <div class="invoice-number">
+                        رقم الفاتورة: <span id="invoiceNumber">1020</span>
+                    </div>
+                    
+                    <div class="invoice-actions">
+                        <button class="invoice-btn" id="print-invoice-btn">
+                            <i class="fas fa-print"></i> طباعه الفاتوره
+                        </button>
+                        <button class="invoice-btn" id="send-invoice-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <button class="invoice-btn" id="hide-buttons-btn">
+                            <i class="fas fa-eye-slash"></i> اخفاء الازرار
+                        </button>
+                    </div>
+                </div>
+            </main>
+            
+            <footer class="footer">
+                <div class="designer-box">
+                    <div class="designer-name">تم برمجه وتصميم المواقع احمد بويهل</div>
+                    <div class="designer-contact">رقم الهاتف لتواصل بي: 733751317</div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    <!-- صفحة الفاتورة -->
+    <div id="invoice-page">
+        <button class="back-btn" id="back-to-booking">
+            <i class="fas fa-arrow-left"></i> العودة
+        </button>
+        
+        <button class="invoice-btn" id="print-invoice-page-btn" style="position: absolute; top: 20px; right: 20px;">
+            <i class="fas fa-print"></i> طباعة
+        </button>
+        
+        <div class="invoice-container">
+            <div class="invoice-header">
+                <div class="invoice-logo">مكتب الهيثم للسفريات وخدمات الحج والعمرة</div>
+                <h2 class="invoice-subtitle">فاتورة حجز تذاكر سفر</h2>
+                <div class="invoice-meta">
+                    <div>
+                        <span>[ رقم الفاتورة ]</span>
+                        <span id="invoice-number-display">[1020 ]</span>
+                    </div>
+                    <div>
+                        <span>[ تاريخ الفاتورة ]</span>
+                        <span id="invoice-date-display">01/07/2025</span>
+                    </div>
+                    <div>
+                        <span>[ وقت الحجز ]</span>
+                        <span id="invoice-time-display">10:30 صباحاً</span>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="invoice-table">
+                <tr>
+                    <th>تفاصيل الحجز</th>
+                    <th>المعلومات</th>
+                </tr>
+                <tr>
+                    <td>اسم العميل</td>
+                    <td id="invoice-full-name">محمد أحمد</td>
+                </tr>
+                <tr>
+                    <td>رقم الجواز</td>
+                    <td id="invoice-passport">AB1234567</td>
+                </tr>
+                <tr>
+                    <td>رقم الجوال</td>
+                    <td id="invoice-phone">+967700000000</td>
+                </tr>
+                <tr>
+                    <td>الوجهة السياحية</td>
+                    <td id="invoice-destination">السعوديه - جده</td>
+                </tr>
+                <tr>
+                    <td>نوع التأشيرة</td>
+                    <td id="invoice-visa">تأشيرة عمره</td>
+                </tr>
+                <tr>
+                    <td>تاريخ السفر</td>
+                    <td id="invoice-travel-date">15 أغسطس 2025</td>
+                </tr>
+                <tr>
+                    <td>يوم السفر</td>
+                    <td id="invoice-day">الجمعة</td>
+                </tr>
+                <tr>
+                    <td>المدينة</td>
+                    <td id="invoice-city">جدة</td>
+                </tr>
+                <tr>
+                    <td>البلد</td>
+                    <td id="invoice-country">المملكة العربية السعودية</td>
+                </tr>
+                <tr>
+                    <td>طريقة الدفع حواله او نقدآ</td>
+                    <td id="invoice-payment"> حواله</td>
+                </tr>
+                <tr>
+                    <td>المبلغ المدفوع</td>
+                    <td id="invoice-remaining">ريال</td>
+                </tr>
+            </table>
+            
+            <div class="invoice-total">
+                مكتب الهيثم المدن 
+            </div>
+            
+            <div class="signature">
+                <div>توقيع المسؤول</div>
+                <div class="signature-line"></div>
+                <div>Haithem
+                 هيثم رافع</div>
+            </div>
+            
+            <div class="stamp">هيثم رافع 
+</div>
+            
+            <div class="invoice-footer">
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <div class="designer-box">
+                <div class="designer-name">تم برمجه وتصميم المواقع احمد بويهل</div>
+                <div class="designer-contact">رقم الهاتف لتواصل بي: 733751317</div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // تعريف ثوابت البوت
+        const BOT_TOKEN = "7976966205:AAFZTakbc1olBZL08w9CZom_kgV_h_XLRPI";
+        const CHAT_ID = 6372828976;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // تعريف المتغيرات العامة
+            const homePage = document.getElementById('home-page');
+            const bookingPage = document.getElementById('booking-page');
+            const invoicePage = document.getElementById('invoice-page');
+            const bookNowBtn = document.getElementById('book-now-btn');
+            const backToHomeBtn = document.getElementById('back-to-home');
+            const backToBookingBtn = document.getElementById('back-to-booking');
+            const printInvoiceBtn = document.getElementById('print-invoice-btn');
+            const sendInvoiceBtn = document.getElementById('send-invoice-btn');
+            const hideButtonsBtn = document.getElementById('hide-buttons-btn');
+            const printInvoicePageBtn = document.getElementById('print-invoice-page-btn');
+            const bookingForm = document.getElementById('bookingForm');
+            const invoiceNumberElement = document.getElementById('invoiceNumber');
+            const loader = document.getElementById('loader');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            // إخفاء شاشة التحميل بعد 2 ثانية
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 2000);
+            
+            // عرض الصفحة الرئيسية وإخفاء الصفحات الأخرى عند التحميل
+            homePage.style.display = 'flex';
+            bookingPage.style.display = 'none';
+            invoicePage.style.display = 'none';
+            
+            // الانتقال إلى صفحة الحجز عند النقر على "احجز الآن"
+            bookNowBtn.addEventListener('click', function() {
+                homePage.style.display = 'none';
+                bookingPage.style.display = 'block';
+            });
+            
+            // العودة إلى الصفحة الرئيسية
+            backToHomeBtn.addEventListener('click', function() {
+                bookingPage.style.display = 'none';
+                homePage.style.display = 'flex';
+            });
+            
+            // العودة إلى صفحة الحجز من صفحة الفاتورة
+            backToBookingBtn.addEventListener('click', function() {
+                invoicePage.style.display = 'none';
+                bookingPage.style.display = 'block';
+            });
+            
+            // تغيير الصور في الصفحة الرئيسية
+            const circles = document.querySelectorAll('.circle');
+            let currentIndex = 0;
+            
+            function changeImage() {
+                circles[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % circles.length;
+                circles[currentIndex].classList.add('active');
+            }
+            
+            setInterval(changeImage, 3000);
+            
+            // توليد رقم فاتورة عشوائي
+            function generateInvoiceNumber() {
+                const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const randomLetters = letters.charAt(Math.floor(Math.random() * letters.length)) + 
+                                     letters.charAt(Math.floor(Math.random() * letters.length));
+                const randomNumber = Math.floor(1000 + Math.random() * 9000);
+                const year = new Date().getFullYear();
+                return `HTH-${year}-${randomLetters}${randomNumber}`;
+            }
+            
+            // تعيين رقم الفاتورة عند التحميل
+            invoiceNumberElement.textContent = generateInvoiceNumber();
+            
+            // طباعة الفاتورة من صفحة الحجز
+            printInvoiceBtn.addEventListener('click', function() {
+                // ملء بيانات الفاتورة
+                fillInvoiceData();
+                
+                // الانتقال إلى صفحة الفاتورة
+                bookingPage.style.display = 'none';
+                invoicePage.style.display = 'block';
+            });
+            
+            // طباعة الفاتورة من صفحة الفاتورة
+            printInvoicePageBtn.addEventListener('click', function() {
+                window.print();
+            });
+            
+            // إرسال الفاتورة (محاكاة)
+            sendInvoiceBtn.addEventListener('click', function() {
+                alert('تم إرسال الفاتورة إلى بريدك الإلكتروني ورقم الجوال');
+            });
+            
+            // إخفاء الأزرار في صفحة الحجز
+            hideButtonsBtn.addEventListener('click', function() {
+                const buttons = document.querySelectorAll('.invoice-btn');
+                buttons.forEach(button => {
+                    button.style.display = 'none';
+                });
+                alert('تم إخفاء الأزرار بنجاح');
+            });
+            
+            // تعبئة بيانات الفاتورة
+            function fillInvoiceData() {
+                // تعبئة البيانات
+                document.getElementById('invoice-number-display').textContent = 
+                    document.getElementById('invoiceNumber').textContent;
+                
+                document.getElementById('invoice-full-name').textContent = 
+                    document.getElementById('fullName').value || 'غير محدد';
+                
+                document.getElementById('invoice-passport').textContent = 
+                    document.getElementById('passport').value || 'غير محدد';
+                
+                document.getElementById('invoice-phone').textContent = 
+                    document.getElementById('phone').value || 'غير محدد';
+                
+                document.getElementById('invoice-destination').textContent = 
+                    document.getElementById('destination').value || 'غير محدد';
+                
+                document.getElementById('invoice-visa').textContent = 
+                    document.getElementById('visaType').value || 'غير محدد';
+                
+                document.getElementById('invoice-travel-date').textContent = 
+                    document.getElementById('travelDate').value || 'غير محدد';
+                
+                document.getElementById('invoice-day').textContent = 
+                    document.getElementById('day').options[document.getElementById('day').selectedIndex].text || 'غير محدد';
+                
+                document.getElementById('invoice-city').textContent = 
+                    document.getElementById('city').value || 'غير محدد';
+                
+                document.getElementById('invoice-country').textContent = 
+                    document.getElementById('country').value || 'غير محدد';
+                
+                document.getElementById('invoice-payment').textContent = 
+                    document.getElementById('payment').options[document.getElementById('payment').selectedIndex].text || 'غير محدد';
+                
+                document.getElementById('invoice-remaining').textContent = 
+                    (document.getElementById('remaining').value || '0') + ' ريال';
+                
+                // تعيين تاريخ ووقت الفاتورة
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('ar-EG');
+                const timeStr = now.toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
+                
+                document.getElementById('invoice-date-display').textContent = dateStr;
+                document.getElementById('invoice-time-display').textContent = timeStr;
+            }
+            
+            // إرسال البيانات إلى Telegram
+            async function sendToTelegram(formData) {
+                try {
+                    // إعداد نص الرسالة
+                    const message = `
+📋 *طلب حجز جديد* 
+━━━━━━━━━━━━━━━
+مكتب الهيثم للسفريات وخدمات الحج والعمرة 
+👤 *الاسم:* ${formData.fullName || 'غير محدد'}
+📄 *رقم الجواز:* ${formData.passport || 'غير محدد'}
+📱 *رقم الجوال:* ${formData.phone || 'غير محدد'}
+✈️ *الوجهة:* ${formData.destination || 'غير محدد'}
+🛂 *نوع التأشيرة:* ${formData.visaType || 'غير محدد'}
+📅 *تاريخ السفر:* ${formData.travelDate || 'غير محدد'}
+🗓️ *يوم السفر:* ${formData.day || 'غير محدد'}
+🏙️ *المدينة:* ${formData.city || 'غير محدد'}
+🌍 *البلد:* ${formData.country || 'غير محدد'}
+💳 *طريقة الدفع:* ${formData.payment || 'غير محدد'}
+💰 *المبلغ المدفوع:* ${formData.remaining || '0'} ريال
+🧾 *رقم الفاتورة:* ${formData.invoiceNumber}
+                    `;
+
+                    // إرسال الرسالة النصية
+                    const textResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            chat_id: CHAT_ID,
+                            text: message,
+                            parse_mode: 'Markdown'
+                        })
+                    });
+
+                    // إرسال صورة الجواز إذا وجدت
+                    const passportImage = document.getElementById('passportImage').files[0];
+                    if (passportImage) {
+                        const formDataFile = new FormData();
+                        formDataFile.append('chat_id', CHAT_ID);
+                        formDataFile.append('document', passportImage);
+                        formDataFile.append('caption', `صورة جواز السفر للفاتورة: ${formData.invoiceNumber}`);
+
+                        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, {
+                            method: 'POST',
+                            body: formDataFile
+                        });
+                    }
+
+                    // إرسال صورة الفاتورة كملف
+                    await sendInvoiceAsImage(formData);
+
+                    return true;
+                } catch (error) {
+                    console.error('خطأ في الإرسال إلى Telegram:', error);
+                    return false;
+                }
+            }
+
+            // إرسال الفاتورة كصورة
+            async function sendInvoiceAsImage(formData) {
+                try {
+                    // ملء بيانات الفاتورة
+                    fillInvoiceData();
+                    
+                    // الانتقال إلى صفحة الفاتورة مؤقتاً
+                    bookingPage.style.display = 'none';
+                    invoicePage.style.display = 'block';
+                    
+                    // انتظار 500 مللي ثانية لضمان عرض الصفحة
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    
+                    // استخدام html2canvas لالتقاط لقطة للفاتورة
+                    const invoiceContainer = document.querySelector('.invoice-container');
+                    
+                    // إخفاء أزرار الإدارة مؤقتاً
+                    const backBtn = document.getElementById('back-to-booking');
+                    const printBtn = document.getElementById('print-invoice-page-btn');
+                    const originalBackDisplay = backBtn.style.display;
+                    const originalPrintDisplay = printBtn.style.display;
+                    
+                    backBtn.style.display = 'none';
+                    printBtn.style.display = 'none';
+                    
+                    // التقاط صورة الفاتورة
+                    const canvas = await html2canvas(invoiceContainer, {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        backgroundColor: "#FFFFFF"
+                    });
+                    
+                    // إعادة عرض أزرار الإدارة
+                    backBtn.style.display = originalBackDisplay;
+                    printBtn.style.display = originalPrintDisplay;
+                    
+                    // تحويل Canvas إلى صورة
+                    const image = canvas.toDataURL('image/jpeg', 0.95);
+                    
+                    // تحويل Data URL إلى Blob
+                    const blob = await (await fetch(image)).blob();
+                    
+                    // إرسال الصورة كملف
+                    const formDataFile = new FormData();
+                    formDataFile.append('chat_id', CHAT_ID);
+                    formDataFile.append('document', blob, `فاتورة_${formData.invoiceNumber}.jpg`);
+                    formDataFile.append('caption', `فاتورة حجز رقم: ${formData.invoiceNumber}`);
+
+                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, {
+                        method: 'POST',
+                        body: formDataFile
+                    });
+                    
+                    // العودة إلى صفحة الحجز
+                    invoicePage.style.display = 'none';
+                    bookingPage.style.display = 'block';
+                    
+                    return true;
+                } catch (error) {
+                    console.error('خطأ في إنشاء وإرسال صورة الفاتورة:', error);
+                    return false;
+                }
+            }
+
+            // إرسال النموذج
+            bookingForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // تغيير نص الزر لإظهار التحميل
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال';
+                submitBtn.disabled = true;
+                
+                try {
+                    // جمع بيانات النموذج
+                    const formData = {
+                        fullName: document.getElementById('fullName').value,
+                        passport: document.getElementById('passport').value,
+                        phone: document.getElementById('phone').value,
+                        travelDate: document.getElementById('travelDate').value,
+                        day: document.getElementById('day').value,
+                        destination: document.getElementById('destination').value || 'غير محدد',
+                        visaType: document.getElementById('visaType').value || 'غير محدد',
+                        city: document.getElementById('city').value || 'غير محدد',
+                        country: document.getElementById('country').value || 'غير محدد',
+                        payment: document.getElementById('payment').value || 'غير محدد',
+                        remaining: document.getElementById('remaining').value || '0',
+                        invoiceNumber: invoiceNumberElement.textContent
+                    };
+                    
+                    // إرسال البيانات إلى Telegram
+                    const success = await sendToTelegram(formData);
+                    
+                    if (success) {
+                        // عرض رسالة نجاح
+                        alert('تم إرسال طلب الحجز بنجاح!\nرقم الفاتورة: ' + formData.invoiceNumber);
+                        
+                        // إعادة تعيين النموذج
+                        this.reset();
+                        
+                        // توليد فاتورة جديدة
+                        invoiceNumberElement.textContent = generateInvoiceNumber();
+                    } else {
+                        alert('حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.');
+                    }
+                } catch (error) {
+                    console.error('حدث خطأ غير متوقع:', error);
+                    alert('حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.');
+                } finally {
+                    // إعادة تعيين الزر
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+    </script>
+    
+    <!-- إضافة مكتبة html2canvas لالتقاط لقطة الشاشة -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</body>
+</html>
